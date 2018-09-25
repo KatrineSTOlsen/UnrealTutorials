@@ -32,7 +32,7 @@ void UOpenDoor::OpenDoor()
 
 void UOpenDoor::CloseDoor()
 {
-	AActor* Owner = GetOwner();
+
 	FRotator NewRotation = FRotator(0.0f, 0.0f, 0.0f);
 	Owner->SetActorRotation(NewRotation);
 }
@@ -46,12 +46,12 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 	if (PressurePlate->IsOverlappingActor(ActorThatOpens))
 	{
 		OpenDoor();
+		LastTimeOpen = GetWorld()->GetTimeSeconds();
 	}
-	else if (!PressurePlate->IsOverlappingActor(ActorThatOpens))
+	else if (CloseDoorDelay < GetWorld()->GetTimeSeconds() - LastTimeOpen)
 	{
 		CloseDoor();
 	}
-
 	// poll the triggervolume every frame 
 	//if the actor that opens is in the volume
 
