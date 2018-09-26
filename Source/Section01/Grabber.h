@@ -26,6 +26,7 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	FVector GetLineTraceEnd();
 		
 private:
 	//ray cast and grab what's within reach
@@ -41,4 +42,7 @@ private:
 
 	UPhysicsHandleComponent* PhysicsHandle = nullptr;
 	UInputComponent* InputComponent = nullptr;
+
+	FVector PlayerViewPointLocation;
+	FRotator PlayerViewPointRotation;
 };
