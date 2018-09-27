@@ -33,9 +33,7 @@ void UOpenDoor::OpenDoor()
 
 void UOpenDoor::CloseDoor()
 {
-
-	FRotator NewRotation = FRotator(0.0f, 0.0f, 0.0f);
-	Owner->SetActorRotation(NewRotation);
+	OnCloseRequest.Broadcast();
 }
 
 float UOpenDoor::GetTotalMassOfActorsOnPlate()

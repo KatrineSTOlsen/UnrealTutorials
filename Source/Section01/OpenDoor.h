@@ -9,6 +9,8 @@
 #include "OpenDoor.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnOpenRequest);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCloseRequest);
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class SECTION01_API UOpenDoor : public UActorComponent
 {
@@ -32,9 +34,10 @@ public:
 		
 	UPROPERTY(BlueprintAssignable)
 		FOnOpenRequest OnOpenRequest;
+	UPROPERTY(BlueprintAssignable)
+		FOnOpenRequest OnCloseRequest;
+
 private:
-	UPROPERTY(EditAnywhere)
-		float OpenAngle = -90.0f;
 	UPROPERTY(EditAnywhere)
 		ATriggerVolume* PressurePlate = nullptr;
 	UPROPERTY(EditAnywhere)
