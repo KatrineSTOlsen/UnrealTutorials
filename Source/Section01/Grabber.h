@@ -45,4 +45,5 @@ private:
 
 	FVector PlayerViewPointLocation;
 	FRotator PlayerViewPointRotation;
+	float GetTotalMassOfActorsOnPlate();
 };
