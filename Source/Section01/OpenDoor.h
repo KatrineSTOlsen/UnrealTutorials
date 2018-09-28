@@ -8,8 +8,8 @@
 
 #include "OpenDoor.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnOpenRequest);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCloseRequest);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnOpen);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnClose);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class SECTION01_API UOpenDoor : public UActorComponent
@@ -24,8 +24,6 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-	void OpenDoor();
-	void CloseDoor();
 	float GetTotalMassOfActorsOnPlate();
 
 public:	
@@ -33,19 +31,15 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 		
 	UPROPERTY(BlueprintAssignable)
-		FOnOpenRequest OnOpenRequest;
+		FOnOpen OnOpen;
 	UPROPERTY(BlueprintAssignable)
-		FOnOpenRequest OnCloseRequest;
+		FOnClose OnClose;
 
 private:
 	UPROPERTY(EditAnywhere)
 		ATriggerVolume* PressurePlate = nullptr;
 	UPROPERTY(EditAnywhere)
-		float CloseDoorDelay = 0.5f;
-	UPROPERTY(EditAnywhere)
 		float TriggerMass = 60.f;
 
-
-	float LastTimeOpen;
 	AActor* Owner = GetOwner();
 };
